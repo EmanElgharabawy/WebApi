@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Add Departments</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+   $(function () {
+      //hang on event of form with id=myform
+      $("#myform").submit(function (e) {
+
+         //prevent Default functionality
+         e.preventDefault();
+
+         //get the action-url of the form
+         var actionurl = "http://localhost:5025/api/Department";
+
+         //do your own request an handle the results
+         $.ajax({
+            url: actionurl,
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(
+               {
+                  "Name": $("#name").val(),
+                  "Location": $("#location").val(),
+                  "Manager": $("#manager").val()
+               }
+            ),
+            success: function (data) {
+            }
+         });
+
+      });
+
+   });
+</script>
+
+<body>
+   <form id="myform">
+      <input type="text" name="name" id="name" placeholder="Enter Name">
+      <input type="text" name="location" id="location" placeholder="Enter Location">
+      <input type="text" name="manager" id="manager" placeholder="Enter Manager">
+      <input type="submit">
+   </form>
+</body>
+
+
+</html>
